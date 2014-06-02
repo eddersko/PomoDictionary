@@ -1,5 +1,9 @@
 package com.example.pomodictionary;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import android.util.Log;
 
 public class Word {
@@ -28,10 +32,10 @@ R.drawable.tsuu_arrow, R.drawable.sika_baby_basket,
 R.drawable.phika_basket, R.drawable.kal_bead, 
 R.drawable.ditsiya_bone_awl, R.drawable.ih_feather, 
 R.drawable.xaja_kujiya_flint_knife, R.drawable.kaday_gambling_sticks, 
-R.drawable.libuu_whistle, R.drawable.show_east, 
+R.drawable.libuu_whistle, R.drawable.shoodaxay_coyote_valley, 
 R.drawable.show_east, R.drawable.chuhula_north, 
 R.drawable.baloxay_potter_valley, R.drawable.yoow_south, 
-R.drawable.yoow_south, R.drawable.bow_west, 
+R.drawable.yoow_south, R.drawable.yowxayamaa_ukiah, 
 R.drawable.bow_west, R.drawable.aa_miphane_my_daughter, 
 R.drawable.aa_mie_my_father, R.drawable.aamibahan_my_husband, 
 R.drawable.aa_mithe_my_mother, R.drawable.aamiki_my_older_brother, 
@@ -79,6 +83,68 @@ private static Integer[] sounds = {
 */
 public static Integer getSound(int position) {
 	return sounds[position];
+}
+
+private static String[] categories = {"traditional", 
+"traditional", "traditional", "traditional", 
+"traditional", "traditional", "traditional", 
+"traditional", "traditional", "traditional", 
+"places", "places", "places", 
+"places", "places", "places", 
+"places", "places", "people", 
+"people", "people", "people", 
+"people", "people", "people", 
+"people", "people", "people", 
+"people", "people", "nature", 
+"nature", "nature", "nature", 
+"nature", "nature", "nature", 
+"nature", "nature", "nature", 
+"nature", "nature", "nature", 
+"nature", "nature", "nature", 
+"nature", "nature", "nature", 
+"nature", "nature", "in the home", 
+"in the home", "in the home", "in the home", 
+"in the home", "in the home", "food", 
+"food", "food", "food", 
+"food", "food", "food", 
+"food", "food", "food", 
+"food", "food", "animals", 
+"animals", "animals", "animals", 
+"animals", "animals", "animals", 
+"animals", "animals", "animals", 
+"animals", "animals", "animals", 
+"animals", "animals", "animals"};
+
+public static int getCategoryCount() {
+	Set<String> set = new HashSet<String>(Arrays.asList(categories));
+	return set.size();
+}
+
+public static String[] getCategories() {
+	Set<String> set = new HashSet<String>(Arrays.asList(categories));
+	String[] categories = new String[set.size()];
+	int n = 0;
+	for (String s: set) {
+		categories[n] = s;
+		n++;
+	}
+	return categories;
+}
+
+public static int[] getCategoryInterval(String str) {
+	int[] interval = new int[2];
+	boolean start = false;
+	for (int i = 0; i < categories.length; i++) {
+		if (!start && str.equals(categories[i])) {
+			interval[0] = i;
+			start = true;
+		} else if (start && !(str.equals(categories[i]))) {
+			interval[1] = i - 1;
+			return interval;
+		}		
+	}
+	interval[1] = categories.length;
+	return interval;
 }
 
 
@@ -215,5 +281,53 @@ private static String[] pomo = {
 "shakaaka", "shakoodo", "ts’iya", 
 "yowsha", "misaxala", "bit̪'umʔt̪u"};
 
+private static String[] description = {
+"hearstmuseum.berkeley.edu, Necklace of abalone shells, Pomo", "http://drycreekrancheria.com/pomo-arrowheads/", 
+"", "Grace Hudson Museum", 
+"String of clamshell beads with one large magnesite bead", "Grace Hudson Museum. These awls were used to sew baskets: the basket weaver would create a hole in the fabric of the coiled basket with the awl, and would then insert the root (sewing fiber) and wrap it around the willow rod(s) foundation.", 
+"Wikimedia, T. Voekler", "http://www.primitiveways.com/", 
+"Grace Hudson Museum", "This traditional beaded whistle was made by Cornelius J. Stevenson in the 1940s. If such a whistle is not taken care of properly, it will whistle by itself.", 
+"http://www.stpfriends.org", "Serglo. Wikimedia Commons", 
+"Serglo. Wikimedia Commons", "", 
+"clip", "Serglo. Wikimedia Commons", 
+"http://www.menupix.com/california/n/550170/", "Serglo. Wikimedia Commons", 
+"drawing", "drawing", 
+"drawing", "drawing", 
+"drawing", "drawing", 
+"drawing", "drawing", 
+"A Pomo man drilling holes in beads. 1906.http://www.firstpeople.us/", "“Aged Pomo Woman” by Edward S. Curtis [Public domain], via Wikimedia Commons", 
+"“Coast Pomo Woman” by Edward S. Curtis [Public domain], via Wikimedia Commons", "“Coast Pomo girl” by Edward S. Curtis [Public domain], via Wikimedia Commons", 
+"", "wikipedia", 
+"http://www.eattheweeds.com", "", 
+"http://www.sonoma.edu          Showy Indian clover flower head. Photo by D. Immel-Jeffery 2004.", "", 
+"Wikimedia, Einar Helland Berger", "http://www.sonoma.edu       California buttercup flower and developing seed head at Ridgecrest in Marin County. Photo 2010 by D. Immel-Jeffery.  ", 
+"wikimedia.public domain", "wikipedia", 
+"wikipedia", "Clear Lake (wikipedia)", 
+"", "Albert Bierstadt. Public domain", 
+"Russian River near Duncan Mills. Ingrid Taylar,https://www.flickr.com", "", 
+"Lykaestria at the English Language Wikipedia", "wikimedia.public domain", 
+"Upper Lake Pomo in Tule Swamp. Edward Curtis. Wikimedia Commons", "http://www.cleanwateraction.org", 
+"http://www.actaonline.org", "", 
+"wikimedia commons", "Elenor Stevenson Gonzales wearing her ’uy-diṱema’", 
+"", "", 
+"Lewis Ronald. Wikimedia Commons", "http://simple.wikipedia.org/wiki/Abalone#California", 
+"commons.wikimedia.org", "http://deborahsmall.wordpress.com/", 
+"", "", 
+"", "www.californiareport.org", 
+"pngimg.com", "", 
+"", "", 
+"sannse at en.wikipedia", "wikipedia.grizzlybear", 
+"", "", 
+"", "Coyote closeup. Christopher Bruno. http://commons.wikimedia.org/wiki/File:Coyote _closeup.jpg.", 
+"http://www.primitiveways.com", "Mikey", 
+"unknown", "Western Whiptail, Cnemidophorus tigris multiscutatus. Chris Brown. 4 October 2006. http://commons.wikimedia.org/wiki/File: Cnemidophorus_tigris_multiscutatus.jpg", 
+"Western meadowlark (Sturnella neglecta). Photo by Kevin Cole 2008, from http://commons.wikimedia.org/wiki/File: Western_Meadowlark.jpg.", "", 
+"Black-tailed jackrabbit eating berries. Basin State Park, Utah. 28 June 2006, James Marvin Phelps, Wikimedia Commons", "Don DeBold, Wikimedia Commons", 
+"wikimedia commons", "Gopher snake (Pituophis catenifer sayi).  Wikimedia Commons: http://commons.wikimedia.org/wiki/File:Pituophis _catenifer_sayi_(2).jpg.", 
+""};
+
+public static String getDescription(int position) {
+	return description[position];
+}
 
 }
