@@ -31,7 +31,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setTitle("Northern Pomo Dictionary");
 		int n = Word.getCount();
+		// int n = Word.getCategoryCount();
 		for (int i = 0; i < n; i++) {
 			//Bitmap image = BitmapFactory.decodeSampleBitmapFromResource(this.getResources(), Word.getImage(i));
 			
