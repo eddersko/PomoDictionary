@@ -35,15 +35,6 @@
         android:gravity="right"
         android:scaleType="centerCrop" />
 
-    <!--<TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="32dp"
-        android:text="This language app is part of a project to archive and make available materials on the Northern Pomo language, collected over 25 years. These material exist due to the dedication and work of Edna Campbell Guerrero and Elenor Stevenson Gonzales, both native speakers of Northern Pomo. This app was designed and produced by people. It was supported in part by a grant from the NEH/NSF Documenting Endangered Languages program (FN-50107-12) to O&apos;Connor, which is gratefully acknowledged. Views expressed in this material are the work of the authors, and do not necessarily reflect the views of the U.S. National Science Foundation or National Endowment for the Humanities. This material may not be published, broadcast, rewritten or redistributed in whole or part with out the express written permission."
-        android:textSize="20sp" />-->
   <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
