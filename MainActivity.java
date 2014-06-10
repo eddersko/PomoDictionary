@@ -1,6 +1,7 @@
 package com.example.pomodictionary;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,47 +17,44 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-/**
- * 
- * @author manish.s
- *
- */
 
 public class MainActivity extends Activity {
+	
 	GridView gridView;
 	ArrayList<Item> gridArray = new ArrayList<Item>();
-	 CustomGridViewAdapter customGridAdapter;
+	CustomGridViewAdapter customGridAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main); 
 		setTitle("Northern Pomo Dictionary");
-		int n = Word.getCount();
-		// int n = Word.getCategoryCount();
-		for (int i = 0; i < n; i++) {
-			//Bitmap image = BitmapFactory.decodeSampleBitmapFromResource(this.getResources(), Word.getImage(i));
-			
-			Bitmap image = decodeSampledBitmapFromResource(getResources(), Word.getImage(i), 250, 250);
-			gridArray.add(new Item(image, Word.getEnglish(i), Word.getPomo(i)));
-
+		
+		String[] categories = Word.getCategories();
+		Map<String, Integer> map = Word.getCategoryMap();
+		
+		for (int i = 0; i < categories.length; i++) {
+			Bitmap image = decodeSampledBitmapFromResource(getResources(), map.get(categories[i]), 250, 250);
+			gridArray.add(new Item(image, categories[i], ""));
 		}
 
 		gridView = (GridView) findViewById(R.id.gridView1);
 		customGridAdapter = new CustomGridViewAdapter(this, R.layout.row_grid, gridArray);
 		gridView.setAdapter(customGridAdapter);
 		final Context ctx = this;
+		
 	    gridView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        	Intent intent = new Intent(ctx, ResultActivity.class);
-	        	intent.putExtra("position", position);
+	        	Intent intent = new Intent(ctx, GridActivity.class); 
+	        	intent.putExtra("position", position); 
 	        	startActivity(intent);
-	}
+	        }
 	    });
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {		
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.main_activity_actions, menu);
 	    return super.onCreateOptionsMenu(menu);
@@ -64,7 +62,6 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_about:
 	            Intent intent = new Intent(this, AboutActivity.class);
@@ -76,15 +73,15 @@ public class MainActivity extends Activity {
 	    return true;
 	}
 	
-	public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-    // Raw height and width of image
-    final int height = options.outHeight;
+	public static int calculateInSampleSize(BitmapFactory.Options options,
+			int reqWidth, int reqHeight) {
+
+	final int height = options.outHeight;
     final int width = options.outWidth;
     int inSampleSize = 1;
 
     if (height > reqHeight || width > reqWidth) {
-
+    	
         final int halfHeight = height / 2;
         final int halfWidth = width / 2;
 
@@ -95,9 +92,9 @@ public class MainActivity extends Activity {
             inSampleSize *= 2;
         }
     }
-
     return inSampleSize;
 }
+	
 	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
 	        int reqWidth, int reqHeight) {
 
