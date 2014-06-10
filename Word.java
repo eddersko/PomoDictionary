@@ -1,9 +1,10 @@
 package com.example.pomodictionary;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-
 import android.util.Log;
 
 public class Word {
@@ -12,29 +13,20 @@ public class Word {
 		Log.i("count", "" + mThumbIds.length);
 		return mThumbIds.length;
 	}
-	/*
-	private static Integer[] mThumbIds = {
-        R.drawable.bitaa_bear, R.drawable.dishiy_black_oak_acorn,
-        R.drawable.gayna_chicken, R.drawable.hayu_dog,
-        R.drawable.kabay_onions, R.drawable.kidi_cat,
-        R.drawable.maayish_jinii_cornbread, R.drawable.misaxala_snake,
-        R.drawable.phitam_flower, R.drawable.them_abalone,
-        R.drawable.xa_water, R.drawable.xal_mussels
-};
-*/
+
 	public static Integer getImage(int position){
 		   return mThumbIds[position];
 		}
 	
 private static Integer[] mThumbIds = {
-	R.drawable.them_kata_abalone_shell, 
+R.drawable.them_kata_abalone_shell, 
 R.drawable.tsuu_arrow, R.drawable.sika_baby_basket, 
 R.drawable.phika_basket, R.drawable.kal_bead, 
 R.drawable.ditsiya_bone_awl, R.drawable.ih_feather, 
 R.drawable.xaja_kujiya_flint_knife, R.drawable.kaday_gambling_sticks, 
-R.drawable.libuu_whistle, R.drawable.shoodaxay_coyote_valley, 
+R.drawable.libuu_whistle, R.drawable.showdaxay_coyote_valley, 
 R.drawable.show_east, R.drawable.chuhula_north, 
-R.drawable.baloxay_potter_valley, R.drawable.yoow_south, 
+R.drawable.baloxay_potter_valley, R.drawable.hayphoma_sherwood_laytonville, 
 R.drawable.yoow_south, R.drawable.yowxayamaa_ukiah, 
 R.drawable.bow_west, R.drawable.aa_miphane_my_daughter, 
 R.drawable.aa_mie_my_father, R.drawable.aamibahan_my_husband, 
@@ -62,7 +54,7 @@ R.drawable.maayish_corn, R.drawable.maayish_jinii_cornbread,
 R.drawable.xal_mussels, R.drawable.kabay_onions, 
 R.drawable.yuhuu_pinole, R.drawable.thonuk_seaweed, 
 R.drawable.toltiya_tortilla, R.drawable.masan_jinii_white_bread, 
-R.drawable.bitaa_bear, R.drawable.kidi_cat, 
+R.drawable.bitaa_bear,  
 R.drawable.kidi_cat, R.drawable.gayna_chicken, 
 R.drawable.diwi_coyote, R.drawable.bishe_deer, 
 R.drawable.hayu_dog, R.drawable.sha_fish, 
@@ -71,16 +63,6 @@ R.drawable.hakaaka_valley_quail, R.drawable.shakoodo_rabbit,
 R.drawable.tsiya_red_tailed_hawk, R.drawable.yowsha_salmon, 
 R.drawable.misaxala_snake, R.drawable.bitumtu_ant};
 	
-/*
-private static Integer[] sounds = {
-    R.raw.bitaa_bear, R.raw.dishiy_black_oak_acorn,
-    R.raw.gayna_chicken, R.raw.hayu_dog,
-    R.raw.kabay_onions, R.raw.kidi_cat,
-    R.raw.maayish_jinii_cornbread, R.raw.misaxala_snake,
-    R.raw.phitam_flower, R.raw.them_abalone,
-    R.raw.xa_water, R.raw.xal_mussels
-};	
-*/
 public static Integer getSound(int position) {
 	return sounds[position];
 }
@@ -109,31 +91,42 @@ private static String[] categories = {"traditional",
 "food", "food", "food", 
 "food", "food", "food", 
 "food", "food", "animals", 
-"animals", "animals", "animals", 
+"animals", "animals", 
 "animals", "animals", "animals", 
 "animals", "animals", "animals", 
 "animals", "animals", "animals", 
 "animals", "animals", "animals"};
 
-public static int getCategoryCount() {
-	Set<String> set = new HashSet<String>(Arrays.asList(categories));
-	return set.size();
+public static String getCategory(int position) {
+	return categories[position];
 }
 
 public static String[] getCategories() {
+	
 	Set<String> set = new HashSet<String>(Arrays.asList(categories));
-	String[] categories = new String[set.size()];
+	String[] categories = new String[set.size() + 1];
 	int n = 0;
+	
 	for (String s: set) {
 		categories[n] = s;
 		n++;
 	}
+	
+	categories[n] = "all";
 	return categories;
 }
 
 public static int[] getCategoryInterval(String str) {
+	
 	int[] interval = new int[2];
+	
+	if (str.equals("all")) {
+		interval[1] = getCount()-1;
+		return interval;
+	}
+	
 	boolean start = false;
+	
 	for (int i = 0; i < categories.length; i++) {
 		if (!start && str.equals(categories[i])) {
 			interval[0] = i;
@@ -143,10 +136,25 @@ public static int[] getCategoryInterval(String str) {
 			return interval;
 		}		
 	}
-	interval[1] = categories.length;
+	
+	interval[1] = categories.length - 1;
 	return interval;
 }
 
+public static Map<String, Integer> getCategoryMap() {
+	Map<String, Integer> map = new HashMap<String, Integer>();
+	
+	map.put("people", R.drawable.people);
+	map.put("nature", R.drawable.nature);
+	map.put("animals", R.drawable.animals);
+	map.put("places", R.drawable.places);
+	map.put("food", R.drawable.food);
+	map.put("in the home", R.drawable.home);
+	map.put("traditional", R.drawable.traditional);
+	map.put("all", R.drawable.all);
+	
+	return map;
+}
 
 private static Integer[] sounds = {R.raw.them_kata_abalone_shell, 
 R.raw.tsuu_arrow, R.raw.sika_baby_basket, 
@@ -183,7 +191,7 @@ R.raw.maayish_corn, R.raw.maayish_jinii_cornbread,
 R.raw.xal_mussels, R.raw.kabay_onions, 
 R.raw.yuhuu_pinole, R.raw.thonuk_seaweed, 
 R.raw.toltiya_tortilla, R.raw.masan_jinii_white_bread, 
-R.raw.bitaa_bear, R.raw.kidi_cat, 
+R.raw.bitaa_bear, 
 R.raw.xadalom_cat, R.raw.gayna_chicken, 
 R.raw.diwi_coyote, R.raw.bishe_deer, 
 R.raw.hayu_dog, R.raw.sha_fish, 
@@ -192,26 +200,50 @@ R.raw.shakaaka_valley_quail, R.raw.shakoodo_rabbit,
 R.raw.tsiya_red_tailed_hawk, R.raw.yowsha_salmon, 
 R.raw.misaxala_snake, R.raw.bitumtu_ant};
  
-
-/*private static String[] english = {
-    "bear", "black oak acorn",
-    "chicken", "dog",
-    "onions", "cat",
-    "cornbread", "snake",
-    "flower", "abalone",
-    "water", "mussels"
-};	*/
-
 public static String getEnglish(int position) {
 	return english[position];
 }
+ 
+public static String getPomo(int position) {
+	return pomo[position];
+}
 
- private static String[] english = {
+private static String[] pomo = {
+"tʰem kata", "ts’uu", "tsiʔka", "pʰik'a", 
+"kal", "ditsiya", "ʔih", 
+"xaja kujiyaʔ", "kaʔday", "libuu", 
+"sho:daxay", "sho:w", "juhula", 
+"baloʔxay", "xayphoʔmaʔ", "yo:w", 
+"yowxayaʔmaa", "bo:w", "ʔa:mi-pʰane", 
+"ʔa:mi-ʔe", "ʔa:mi-bahan", "ʔa:mi-tʰe", 
+"ʔa:mi-ki", "khe kawiyaba:", "ʔa:mi-dahan", 
+"ʔa:mi-t'iy", "busaʔ yem", "datʰaʔ yem", 
+"ma:t̪a", "dashoyaʔ", "xalal", 
+"dishiy xale", "ts'iwish", "xaba:", 
+"so", "xawa: xale", "ho", 
+"pʰit̪’am", "pʰut̪", "jom xale", 
+"dano", "xashapomitin", "millee", 
+"k'asil xale", "xabeda", "xabe", 
+"mit̪'aa", "pʰilus", "tʰibee", 
+"xa", "k'uhum", "xati", 
+"mishin", "ʔuy-dit̪emaʔ", "ja", 
+"shats'on", "t'ik'", "tʰem", 
+"ʔiiholʔ", "dishi", "kayinaʔ", 
+"ma:yish", "ma:yish jini:", "xal", 
+"k'abay", "yuhu:", "tʰonuk'", 
+"t̪olt̪iyaʔ", "masan jini:", "bita:", 
+ "xadalom", "kayinaʔ", 
+"diwi", "bishe", "hayu", 
+"sha", "mit̪ʰu:lu", "jishil", 
+"shaka:ka", "shako:do", "ts’iya", 
+"yowsha", "misaxala", "bit̪'umʔt̪u"};
+
+private static String[] english = {
 "abalone shell", "arrow head", "baby basket", "basket", 
 "bead", "bone awl", "feather", 
 "flint knife", "gambling sticks, staves", "whistle", 
 "Coyote Valley", "east", "north", 
-"Potter Valley", "Sherwood/Laytonville", "South", 
+"Potter Valley", "Sherwood/Laytonville", "south", 
 "Ukiah", "west", "my daughter", 
 "my father", "my husband", "my mother", 
 "my older brother", "my son", "my wife", 
@@ -230,101 +262,55 @@ public static String getEnglish(int position) {
 "corn", "cornbread", "mussels", 
 "onions", "pinole", "seaweed", 
 "tortilla", "white bread", "bear", 
-"cat", "cat", "chicken", 
+"cat", "chicken", 
 "Coyote", "deer", "dog, dogs", 
 "fish", "lizard", "meadowlark", 
 "quail, valley quail", "rabbit", "red-tailed hawk", 
 "salmon", "snake", "ant"};
- 
-
-/*
-private static String[] pomo = {
-    "bitaa", "dishiy",
-    "kayinaʔ", "hayu",
-    "k'abay", "kidi",
-    "maayish jinii","misaxala",
-    "pʰit̪’am", "tʰem",
-    "xa", "xal"
-};*/	
-
-public static String getPomo(int position) {
-	return pomo[position];
-}
-
-private static String[] pomo = {
-"tʰem kata", "ts’uu", "tsiʔka", "pʰik'a", 
-"kal", "ditsiya", "ʔih", 
-"xaja kujiyaʔ", "kaʔday", "libuu", 
-"shoodaxay", "shoow", "juhula", 
-"baloʔxay", "xayphoʔmaʔ", "yoow", 
-"yowxayaʔmaa", "boow", "ʔaami-pʰane", 
-"ʔaami-ʔe", "ʔaami-bahan", "ʔaami-tʰe", 
-"ʔaami-ki", "khe kawiyabaa", "ʔaami-dahan", 
-"ʔaami-t'iy", "busaʔ yem", "datʰaʔ yem", 
-"maat̪a", "dashoyaʔ", "xalal", 
-"dishiy xale", "ts'iwish", "xabaa", 
-"so", "xawaa xale", "ho", 
-"pʰit̪’am", "pʰut̪", "jom xale", 
-"dano", "xashapomitin", "millee", 
-"k'asil xale", "xabeda", "xabe", 
-"mit̪'aa", "pʰilus", "tʰibee", 
-"xa", "k'uhum", "xati", 
-"mishin", "ʔuy-dit̪emaʔ", "ja", 
-"shats'on", "t'ik'", "tʰem", 
-"ʔiiholʔ", "dishi", "kayinaʔ", 
-"maayish", "maayish jinii", "xal", 
-"k'abay", "yuhuu", "tʰonuk'", 
-"t̪olt̪iyaʔ", "masan jinii", "bitaa", 
-"kidi", "xadalom", "kayinaʔ", 
-"diwi", "bishe", "hayu", 
-"sha", "mit̪ʰuulu", "jishil", 
-"shakaaka", "shakoodo", "ts’iya", 
-"yowsha", "misaxala", "bit̪'umʔt̪u"};
 
 private static String[] description = {
-"hearstmuseum.berkeley.edu, Necklace of abalone shells, Pomo", "http://drycreekrancheria.com/pomo-arrowheads/", 
-"", "Grace Hudson Museum", 
-"String of clamshell beads with one large magnesite bead", "Grace Hudson Museum. These awls were used to sew baskets: the basket weaver would create a hole in the fabric of the coiled basket with the awl, and would then insert the root (sewing fiber) and wrap it around the willow rod(s) foundation.", 
-"Wikimedia, T. Voekler", "http://www.primitiveways.com/", 
-"Grace Hudson Museum", "This traditional beaded whistle was made by Cornelius J. Stevenson in the 1940s. If such a whistle is not taken care of properly, it will whistle by itself.", 
-"http://www.stpfriends.org", "Serglo. Wikimedia Commons", 
-"Serglo. Wikimedia Commons", "", 
-"clip", "Serglo. Wikimedia Commons", 
-"http://www.menupix.com/california/n/550170/", "Serglo. Wikimedia Commons", 
-"drawing", "drawing", 
-"drawing", "drawing", 
-"drawing", "drawing", 
-"drawing", "drawing", 
-"A Pomo man drilling holes in beads. 1906.http://www.firstpeople.us/", "“Aged Pomo Woman” by Edward S. Curtis [Public domain], via Wikimedia Commons", 
+"hearstmuseum.berkeley.edu, Necklace of abalone shells, Pomo", "Mendocino County Museum", 
+"Photo by M.C. O'Connor", "Grace Hudson Museum & Sun House, Ukiah, CA", 
+"String of clamshell beads with	one large magnesite bead", "Grace Hudson Museum & Sun House, Ukiah, CA. These awls were used to sew baskets: the basket weaver would create a hole in the fabric of the coiled basket with the awl, and would then insert the root (sewing fiber) and wrap it around the willow rod(s) foundation.", 
+"Wikimedia, T. Voekler", "Dino Labiste. http://www.primitiveways.com/", 
+"Grace Hudson Museum & Sun House, Ukiah, CA", "This traditional beaded whistle was made by Cornelius J. Stevenson in the 1940s. If such a whistle is not taken care of properly, it will whistle by itself. Photo: mco@bu.edu", 
+"Caltrans photo, 1953, courtesy of Eddie F. Knight, Coyote Valley Band of Pomo Indians", "Serglo. Wikimedia Commons", 
+"Serglo. Wikimedia Commons", "www.MedocinoOrganics.com", 
+"mco@bu.edu", "Serglo. Wikimedia Commons", 
+"mco@bu.edu", "Serglo. Wikimedia Commons", 
+"Drawing", "Drawing", 
+"Drawing", "Drawing", 
+"Drawing", "Drawing", 
+"Drawing", "Drawing", 
+"MAN NEEDS DESCRIPTION", "“Aged Pomo Woman” by Edward S. Curtis [Public domain], via Wikimedia Commons", 
 "“Coast Pomo Woman” by Edward S. Curtis [Public domain], via Wikimedia Commons", "“Coast Pomo girl” by Edward S. Curtis [Public domain], via Wikimedia Commons", 
-"", "wikipedia", 
-"http://www.eattheweeds.com", "", 
-"http://www.sonoma.edu          Showy Indian clover flower head. Photo by D. Immel-Jeffery 2004.", "", 
-"Wikimedia, Einar Helland Berger", "http://www.sonoma.edu       California buttercup flower and developing seed head at Ridgecrest in Marin County. Photo 2010 by D. Immel-Jeffery.  ", 
-"wikimedia.public domain", "wikipedia", 
-"wikipedia", "Clear Lake (wikipedia)", 
-"", "Albert Bierstadt. Public domain", 
-"Russian River near Duncan Mills. Ingrid Taylar,https://www.flickr.com", "", 
-"Lykaestria at the English Language Wikipedia", "wikimedia.public domain", 
-"Upper Lake Pomo in Tule Swamp. Edward Curtis. Wikimedia Commons", "http://www.cleanwateraction.org", 
-"http://www.actaonline.org", "", 
-"wikimedia commons", "Elenor Stevenson Gonzales wearing her ’uy-diṱema’", 
-"", "", 
+"Dino Labiste. http://www.primitiveways.com", "Wikipedia", 
+"http://www.eattheweeds.com", "mco@bu.edu", 
+"http://www.sonoma.edu Showy Indian clover flower head. Photo by D. Immel-Jeffery 2004.", "Wikimedia Commons", 
+"Einar Helland Berger. Wikimedia Commons", "http://www.sonoma.edu California buttercup flower and developing seed head at Ridgecrest in Marin County. Photo 2010 by D. Immel-Jeffery.  ", 
+"Wikimedia Commons", "Wikimedia Commons", 
+"mco@bu.edu", "Clear Lake (wikipedia)", 
+"mco@bu.edu", "Albert Bierstadt. Public domain", 
+"mco@bu.edu", "photos-public-domain.com", 
+"Lykaestria at the English Language Wikipedia", "Wikimedia. Public domain", 
+"Upper Lake Pomo in Tule Swamp. Edward Curtis. Wikimedia Commons", "Alex Anliker. Wikimedia Commons", 
+"Photo by Debbie Delatour. http://www.actaonline.org", "Tim Evanson. Wikimedia Commons", 
+"Wikimedia Commons", "Elenor Stevenson Gonzales wearing her ’uy-diṱema’", 
+"mco@bu.edu", "mco@bu.edu. Quilt made by Elenor Stevenson Gonzales", 
 "Lewis Ronald. Wikimedia Commons", "http://simple.wikipedia.org/wiki/Abalone#California", 
-"commons.wikimedia.org", "http://deborahsmall.wordpress.com/", 
-"", "", 
-"", "www.californiareport.org", 
-"pngimg.com", "", 
-"", "", 
-"sannse at en.wikipedia", "wikipedia.grizzlybear", 
-"", "", 
-"", "Coyote closeup. Christopher Bruno. http://commons.wikimedia.org/wiki/File:Coyote _closeup.jpg.", 
-"http://www.primitiveways.com", "Mikey", 
-"unknown", "Western Whiptail, Cnemidophorus tigris multiscutatus. Chris Brown. 4 October 2006. http://commons.wikimedia.org/wiki/File: Cnemidophorus_tigris_multiscutatus.jpg", 
-"Western meadowlark (Sturnella neglecta). Photo by Kevin Cole 2008, from http://commons.wikimedia.org/wiki/File: Western_Meadowlark.jpg.", "", 
+"Wikimedia Commons", "mco@bu.edu", 
+"Wikimedia Commons", "Wikimedia Commons", 
+"Wikimedia Commons", "www.californiareport.org", 
+"pngimg.com", "nomeatathlete", 
+"Grace Hudson Museum & Sun House, Ukiah, CA", "mco@bu.edu", 
+"pngimg.com", "wikipedia.grizzlybear", "Wikimedia Commons", 
+"Wikipedia Commons", "Coyote closeup. Christopher Bruno. http://commons.wikimedia.org/wiki/File:Coyote _closeup.jpg.", 
+"Dino Labiste. http://www.primitiveways.com", "Photo by J.T. O'Connor", 
+"pngimg.com", "Western Whiptail, Cnemidophorus tigris multiscutatus. Chris Brown. 4 October 2006. http://commons.wikimedia.org/wiki/File: Cnemidophorus_tigris_multiscutatus.jpg", 
+"Western meadowlark (Sturnella neglecta). Photo by Kevin Cole 2008, from http://commons.wikimedia.org/wiki/File: Western_Meadowlark.jpg.", "Wikimedia Commons", 
 "Black-tailed jackrabbit eating berries. Basin State Park, Utah. 28 June 2006, James Marvin Phelps, Wikimedia Commons", "Don DeBold, Wikimedia Commons", 
-"wikimedia commons", "Gopher snake (Pituophis catenifer sayi).  Wikimedia Commons: http://commons.wikimedia.org/wiki/File:Pituophis _catenifer_sayi_(2).jpg.", 
-""};
+"Wikimedia Commons", "Gopher snake (Pituophis catenifer sayi).  Wikimedia Commons: http://commons.wikimedia.org/wiki/File:Pituophis _catenifer_sayi_(2).jpg.", 
+"Wikimedia Commons"};
 
 public static String getDescription(int position) {
 	return description[position];
