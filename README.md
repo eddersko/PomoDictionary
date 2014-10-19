@@ -1,7 +1,7 @@
 PomoDictionary
 ==============
 
-This version is currently outdated. A template is in the works, and will be tested on Kashaya and Medumba. This app along with a language learning website will appear as an e-poster at the International Conference of Language Documentation and Conservation in late-February. The e-poster is titled "Templates for Language Learning Resources" which also won one of six best student abstracts. Please check us out!
+This version is currently outdated. A template is in the works, and will be tested on Kashaya and Medumba. This app along with a language learning website will appear as an e-poster at the International Conference of Language Documentation and Conservation in late-February, 2015. The e-poster is titled "Templates for Language Learning Resources" which also won one of six best student abstracts. Please check us out!
 
 Keywords: endangered languages; language preservation; language conservation; language revitaliation; Northern Pomo
 
