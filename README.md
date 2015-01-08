@@ -1,14 +1,12 @@
-PomoDictionary
+Template for Multi-Layered Langauge Resources (Android App)
 ==============
 
-This version is currently outdated. A template is in the works, and will be tested on Kashaya and Medumba. This app along with a language learning website will appear as an e-poster at the International Conference of Language Documentation and Conservation in late-February, 2015. The e-poster is titled "Templates for Language Learning Resources" which also won one of six best student abstracts. Feel free to check us out, and ask questions!
+This template along with a language learning website will appear as an e-poster at the International Conference of Language Documentation and Conservation in late-February, 2015. Feel free to check us out!
 
 The fully functional app can be found here: https://play.google.com/store/apps/details?id=com.northpomo.janoshojin&hl=en
 
-Keywords: endangered languages; language preservation; language conservation; language revitaliation; Northern Pomo
+Keywords: endangered languages; language preservation; language conservation; language revitalization
 
 About
 =====
-This language app is part of a project to archive and make available materials on the Northern Pomo language, collected over 25 years. These material exist due to the dedication and work of Edna Campbell Guerrero and Elenor Stevenson Gonzales, both native speakers of Northern Pomo. This app was designed by Elodie Paquette, implemented in iOS by Elodie Paquette and Josh Leibsly, and implemented in Android by Edwin Ko. It was supported in part by a grant from the NEH/NSF Documenting Endangered Languages program (FN-50107-12) to Catherine O'Connor, which is gratefully acknowledged. Views expressed in this material are the work of the authors, and do not necessarily reflect the views of the U.S. National Science Foundation or National Endowment for the Humanities. This material may not be sold.
-
-This code is fully adaptable and available for use by others. All changes should be made in Word.java where the data is kept. AboutActivity.java and activity_about refer to the about page and can be freely modified. Questions about the source code within the repository can be directed towards the author at ek684@georgetown.edu.
+The current project is supported in part by a grant from the NEH/NSF Documenting Endangered Languages program (FN-50107-12) to Catherine O'Connor, which is gratefully acknowledged. Previous grants from the National Science Foundation and National Endowment for the Humanities supported data collection in 1990s. Views expressed in this material are the work of the authors and do not necessarily reflect the views of the U.S. National Science Foundation or the National Endowment for the Humanities. This material may not be sold and no charges may be made for its use.
