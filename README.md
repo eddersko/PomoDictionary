@@ -5,7 +5,7 @@ This template along with a language learning website will appear as an e-poster 
 
 The fully functional app can be found here for Northern Pomo: https://play.google.com/store/apps/details?id=com.northpomo.janoshojin&hl=en
 
-The app for Kashaya is underway.
+The fully functional app can be found here for Kashaya Pomo: https://play.google.com/store/apps/details?id=com.northpomo.kashaya
 
 Keywords: endangered languages; language preservation; language conservation; language revitalization
 
